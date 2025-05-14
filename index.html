@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>NeoCinema | Главная</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="index.css"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: radial-gradient(#0a0a1a, #000);
+      color: white;
+    }
+    .neon {
+      text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff;
+    }
+    .film-card:hover video {
+      opacity: 1;
+    }
+    /* Скрыть скроллбар */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none; /* IE и Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+    #resetButton {
+      padding: 8px 16px;
+      margin-left: 10px;
+      background-color: #ff4c4c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    #resetButton:hover {
+      background-color: #ff0000;
+    }
+    .filters select,
+    .filters input[type="text"] {
+      background-color: #1a1a2e;
+      color: #ffffff;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 16px;
+      margin: 5px;
+      outline: none;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .filters select:focus,
+    .filters input[type="text"]:focus {
+      border-color: #00ffff;
+      box-shadow: 0 0 10px #00ffff88;
+    }
+    #resetButton {
+      background-color: #ff4c4c;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    #resetButton:hover {
+      background-color: #ff0000;
+      box-shadow: 0 0 8px #ff0000aa;
+    }
+    .filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+    .fade-text {
+      transition: opacity 0.3s ease-in-out;
+    }
+    
+    /* Адаптивные стили */
+    @media (max-width: 768px) {
+      header {
+        padding: 10px;
+      }
+      .logo {
+        font-size: 24px;
+      }
+      nav {
+        font-size: 14px;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .film-card {
+        width: 150px;
+        height: 225px;
+      }
+      .movie-card {
+        width: 100%;
+        max-width: 280px;
+      }
+      .modal-content {
+        width: 95%;
+        padding: 15px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      header {
+        flex-direction: column;
+        padding: 8px;
+      }
+      nav {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      nav a {
+        margin: 0 5px 5px;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 0.9rem;
+      }
+      .film-card {
+        width: 120px;
+        height: 180px;
+      }
+      .movie-card {
+        width: 100%;
+        max-width: 240px;
+      }
+      .modal-content {
+        width: 98%;
+        padding: 10px;
+      }
+      .modal-buttons {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .modal-buttons button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="overflow-x-hidden">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between px-6 py-4 bg-black bg-opacity-90 fixed top-0 w-full z-50 shadow-lg">
+    <img src="c294b46e-6706-4c55-81e5-3240b7e58-08.png" alt="NeoCinema" class="h-16">
+    <nav class="space-x-4 text-white text-sm">
+      <a href="#" class="hover:text-cyan-400">Главная</a>
+      <a href="#catalog" class="hover:text-cyan-400">Каталог</a>
+      <a href="#about" class="hover:text-cyan-400">О нас</a>
+      <a href="contacts.html" class="hover:text-cyan-400">Контакты</a>
+      <a href="login.html" class="hover:text-cyan-400">Вход/Регестрация</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="h-screen flex flex-col justify-center items-center text-center pt-24">
+    <h1 class="text-5xl md:text-7xl font-bold neon mb-4">NeoCinema</h1>
+    <p class="text-lg md:text-2xl text-gray-300 mb-6">Галактика фильмов, сериалов и фантастики</p>
+    <a href="#catalog" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-6 rounded-full transition">Смотреть сейчас</a>
+  </section>
+
+<!-- Carousel Section -->
+<section class="px-6 py-16 bg-gradient-to-b from-black via-[#11111f] to-black">
+  <h2 class="text-3xl mb-6 font-semibold neon">Топ-10 галактических фильмов</h2>
+
+  <div class="flex overflow-x-auto space-x-6 scrollbar-hide">
+    <!-- Фильм 1 -->
+    <div class="relative w-64 h-96 rounded-xl overflow-hidden shadow-xl film-card group">
+      <img src="6173994253.jpg" loading="lazy"class="object-cover w-full h-full transition-opacity duration-300 group-hover:opacity-0" alt="Интерстеллар">
+<video class="absolute top-0 left-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+       muted autoplay loop playsinline>
+  <source src="Interstellar.mp4" type="video/mp4">
+      </video>
+      <div class="absolute bottom-0 w-full bg-gradient-to-t from-black to-transparent p-4">
+        <h3 class="font-bold text-lg">Интерстеллар</h3>
+<a href="movie.html?id=157336" class="btn">Подробнее</a>
+</div>
+    </div>
+
+    <!-- Фильм 2 -->
+    <div class="relative w-64 h-96 rounded-xl overflow-hidden shadow-xl film-card group">
+      <img src="t-z-1n3dtjQRsF4lV8buG9ggogYri0FsYj2Ptm-myefshLr_Gi4sZJhNmsGSpe5fqPiNmf-T4ZXzfms-p8rg97Ms2ydcKHMx9UHbBaKz6q8Y9eMCzw51LbMIilOdVctkzhOYnOisLqKMKY6wd3A7y6xoXUj6QmUhpF3fadK-xKcW3t1n-94WF0YRTIUlV_9NW0OTIihpsypRH73XjM.webp" loading="lazy"class="object-cover w-full h-full transition-opacity duration-300 group-hover:opacity-0" alt="Звёздные войны">
+  <video class="absolute top-0 left-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+       muted autoplay loop playsinline>
+  <source src="Star Wars_ The Complete Saga Trailer.mp4" type="video/mp4">
+      </video>
+      <div class="absolute bottom-0 w-full bg-gradient-to-t from-black to-transparent p-4">
+        <h3 class="font-bold text-lg">Звёздные войны</h3>
+<a href="movie.html?id=11" class="btn">Подробнее</a>
+      </div>
+    </div>
+
+   <!-- Фильм 3 -->
+    <div class="relative w-64 h-96 rounded-xl overflow-hidden shadow-xl film-card group">
+      <img src="t-z-1n3dtjQRsF4lV8buG9ggogYri0FsYj2Ptm-myefshLr_Gi4sZJhNisHSVe5PqH3tya-TgRVjfg5LQrrg9_O8uydpbTMh8GT7dfIW6tpN4LbXnw51LbMIilOdVctkzhOYnOisLqKMKY6wd3A7y6xoXUj6QmUhpF3fadK-xKcW3t1n-94WF0YRTIUlV_9NW0OTIihpsypR.webp" loading="lazy"class="object-cover w-full h-full transition-opacity duration-300 group-hover:opacity-0" alt="Чужой">
+     <video class="absolute top-0 left-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+       muted autoplay loop playsinline>
+  <source src="Чужой 1979  Трейлер.mp4" type="video/mp4">
+      </video>
+      <div class="absolute bottom-0 w-full bg-gradient-to-t from-black to-transparent p-4">
+        <h3 class="font-bold text-lg">Чужой</h3>
+<a href="movie.html?id=348" class="btn">Подробнее</a>
+      </div>
+    </div>
+
+
+    <!-- Добавляй другие фильмы по этому же шаблону -->
+  </div>
+</section>
+
+  <section id="catalog" class="pt-28 px-6">
+    <h1 class="text-4xl font-bold text-center neon mb-8">Каталог фильмов</h1>
+</section>
+<div class="bg-black min-h-screen p-6 text-white">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-cyan-400">🔍 Поиск фильмов</h1>
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Введите название фильма..."
+      class="w-full p-3 rounded-xl bg-neutral-900 border border-cyan-500 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 mb-4"
+    />
+    
+    <div id="searchResults" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+  </div>
+</div>
+ <div id="suggestions" class="absolute z-10 mt-2 bg-[#111] border border-cyan-600 rounded-lg shadow-xl w-full md:w-1/2 max-h-60 overflow-y-auto hidden">
+    <!-- Подсказки динамически добавляются здесь -->
+    <!-- Пример: -->
+    <!--
+    <div class="flex items-center p-3 hover:bg-[#1e1e1e] cursor-pointer">
+      <img src="poster.jpg" alt="Poster" class="w-12 h-16 object-cover rounded mr-3">
+      <div>
+        <p class="text-white font-medium">Название фильма</p>
+        <p class="text-sm text-gray-400">Год, жанр</p>
+      </div>
+    </div>
+    -->
+  </div>
+</div>
+  <!-- Горизонтальный скролл без скроллбара -->
+  <div id="scrollContainer"
+       class="flex overflow-x-auto space-x-6 pb-4 snap-x snap-mandatory scrollbar-hide"
+       style="scroll-behavior: smooth;">
+
+    <!-- Карточка 1 -->
+    <div class="movie-card flex-shrink-0 w-64 bg-gray-800 rounded-lg p-4 cursor-pointer hover:scale-105 transition snap-start"
+  data-id="129"
+data-title="Унесённые призраками"
+data-description="Тихиро с мамой и папой переезжает в новый дом. Заблудившись по дороге..."
+          data-video="Унесённые призраками — Русский трейлер (2001).mp4">
+      <img src="8d7SRTHz7Gq7OJ1SS59vh0y8jkNdmsYX5U3Bagb11qLvKYHMibbLWDEan88MIb1LGqLyETOhidku3IA-L864DWXNh5L1dnq97L_NUp2KOsHevlrSW8jSxuIJFX2RPhqo46PdRQZ8w1MpSs6ey_ZrHMqmsIe39swL60AbLypfKFD7UtENdmUtpT6onlmCW26MFHtLz0Rei9l8TM.webp" loading="lazy" alt="Постер" class="w-full rounded mb-2" />
+      <h2 class="movie-title">Унесённые призраками</h2>
+ <p><span class="movie-year">2001</span> • <span class="movie-genres">аниме</span> • 8.0</p>
+      <p class="text-sm text-gray-300">
+Тихиро с мамой и папой переезжает в новый дом. Заблудившись по дороге, они оказываются в странном пустынном городе, где их ждет великолепный пир. Родители с жадностью набрасываются на еду и к ужасу девочки превращаются в свиней, став пленниками злой колдуньи Юбабы. Теперь, оказавшись одна среди волшебных существ и загадочных видений, Тихиро должна придумать, как избавить своих родителей от чар коварной старухи.      </p>
+    </div>
+
+    <!-- Карточка 2 -->
+    <div class="movie-card flex-shrink-0 w-64 bg-gray-800 rounded-lg p-4 cursor-pointer hover:scale-105 transition snap-start"
+  data-id="77338"
+ data-title="1+1"
+     data-description="Пострадав в результате несчастного случая, богатый аристократ Филипп нанимает..."
+         data-video="_Неприкасаемые (2011) — русский трейлер.mp4">
+      <img src="8d7SRTHz7Gq7OJ1SS59vh0y8jkNdmsYX5U3Bagb11qLvKYHMibbLWDEbX01MYL2KXTFzhbKiXhs7Woerbw89CySPU5XmYDsqKzhNUt4LuxWeaVsQWppUh2IbBT_RJdqvY6MaAQE6ANCohI6e3acrnQrhd0YxcN1c6oqbMP9ebxt5ERsCueMqaTFqWJdDlCvBEnRLQodRAt59hU.webp" loading="lazy" alt="Постер" class="w-full rounded mb-2" />
+      <h2 class="movie-title">1+1</h2>
+     <p><span class="movie-year">2011</span> • <span class="movie-genres"> Драма, комедия</span> • 8.4</p>
+      <p class="text-sm text-gray-300">
+Пострадав в результате несчастного случая, богатый аристократ Филипп нанимает в помощники человека, который менее всего подходит для этой работы, – молодого жителя предместья Дрисса, только что освободившегося из тюрьмы. Несмотря на то, что Филипп прикован к инвалидному креслу, Дриссу удается привнести в размеренную жизнь аристократа дух приключений.      </p>
+    </div>
+
+    <!-- Карточка 3 -->
+    <div class="movie-card flex-shrink-0 w-64 bg-gray-800 rounded-lg p-4 cursor-pointer hover:scale-105 transition snap-start"
+  data-id="278"
+ data-title="Побег из Шоушенка"
+     data-description="Бухгалтер Энди Дюфрейн обвинён в убийстве собственной жены и её любовника..."
+         data-video="Побег из Шоушенка (1994) — русский трейлер.mp4">
+      <img src="8d7SRTHz7Gq7OJ1SS59vh0y8jkNdmsYX5U3Bagb11qLvKYHMibbLWDEbXg1OIL3JWraz0Ca0iw86nJXrb464DXAPxxL1dPk-rL0PE4mLrkHK6xlGG0jSxuIJFX2RPhqo46PdRQZ8w1MpSs6ey_ZrHMqmsIe39swL60AbLypfKFD7UtENdmUtpT6onlmCW26MFHtLz0Rei9l8TM.webp" loading="lazy" alt="Постер" class="w-full rounded mb-2" />
+      <h2 class="movie-title">Побег из Шоушенка</h2>
+     <p><span class="movie-year">1994 </span> • <span class="movie-genres"> Драма </span>• 9.1</p>
+      <p class="text-sm text-gray-300">
+Бухгалтер Энди Дюфрейн обвинён в убийстве собственной жены и её любовника. Оказавшись в тюрьме под названием Шоушенк, он сталкивается с жестокостью и беззаконием, царящими по обе стороны решётки. Каждый, кто попадает в эти стены, становится их рабом до конца жизни. Но Энди, обладающий живым умом и доброй душой, находит подход как к заключённым, так и к охранникам, добиваясь их особого к себе расположения.      </p>
+    </div>
+
+    <!-- Карточка 4 -->
+    <div class="movie-card flex-shrink-0 w-64 bg-gray-800 rounded-lg p-4 cursor-pointer hover:scale-105 transition snap-start"
+  data-id="120"
+ data-title="Властелин колец 3- Возвращение Короля"
+     data-description="Повелитель сил тьмы Саурон направляет свою бесчисленную армию под стены Минас-Тирита, крепости Последней Надежды..."
+         data-video="Властелин колец 3- Возвращение Короля (2003) — русский трейлер HD.mp4">
+      <img src="8d7SRTHz7Gq7OJ1SS59vh0y8jkNdmsYX5U3Bagb11qLvKYHMibbLWDEaH48MoT1LGqPmUac0ylsvnJR_bw84DXAah1L1oPu97KtaUwiLe1TLvpoQDsjSxuIJFX2RPhqo46PdRQZ8w1MpSs6ey_ZrHMqmsIe39swL60AbLypfKFD7UtENdmUtpT6onlmCW26MFHtLz0Rei9l8TM.webp" loading="lazy" alt="Постер" class="w-full rounded mb-2" />
+      <h2 class="movie-title">Властелин колец: Возвращение короля</h2>
+     <p><span class="movie-year">2003 </span> • <span class="movie-genres"> фэнтези, драма, боевик </span>• 8.7</p>
+      <p class="text-sm text-gray-300">
+Повелитель сил тьмы Саурон направляет свою бесчисленную армию под стены Минас-Тирита, крепости Последней Надежды. Он предвкушает близкую победу, но именно это мешает ему заметить две крохотные фигурки — хоббитов, приближающихся к Роковой Горе, где им предстоит уничтожить Кольцо Всевластья.      </p>
+    </div>
+
+    <!-- Карточка 5 -->
+    <div class="movie-card flex-shrink-0 w-64 bg-gray-800 rounded-lg p-4 cursor-pointer hover:scale-105 transition snap-start"
+  data-id="550"
+ data-title="Бойцовский клуб"
+     data-description="Сотрудник страховой компании страдает хронической бессонницей и отчаянно пытается вырваться из мучительно скучной жизни..."
+         data-video="БОЙЦОВСКИЙ КЛУБ - Новый Трейлер (2023).mp4">
+      <img src="8d7SRTHz7Gq7OJ1SS59vh0y8jkNdmsYX5U3Bagb11qLvKYHMibbLWDEaHo9N4ryLmrSmBWZiCs4uXIHre1r4DXCPktL1YC9-7L0aBp0K-xQKv9uGG0jSxuIJFX2RPhqo46PdRQZ8w1MpSs6ey_ZrHMqmsIe39swL60AbLypfKFD7UtENdmUtpT6onlmCW26MFHtLz0Rei9l8TM.webp" loading="lazy" alt="Постер" class="w-full rounded mb-2" />
+      <h2 class="movie-title">Бойцовский клуб</h2>
+      <p><span class="movie-year">1999 </span> • <span class="movie-genres"> триллер, драма </span>• 8.7</p>
+      <p class="text-sm text-gray-300">
+Сотрудник страховой компании страдает хронической бессонницей и отчаянно пытается вырваться из мучительно скучной жизни. Однажды в очередной командировке он встречает некоего Тайлера Дёрдена — харизматического торговца мылом с извращенной философией. Тайлер уверен, что самосовершенствование — удел слабых, а единственное, ради чего стоит жить, — саморазрушение.      </p>
+    </div>
+
+    <!-- Карточка 6 -->
+    <div class="movie-card flex-shrink-0 w-64 bg-gray-800 rounded-lg p-4 cursor-pointer hover:scale-105 transition snap-start"
+  data-id="27205"
+ data-title="Начало"
+     data-description="Кобб – талантливый вор, лучший из лучших в опасном искусстве извлечения: он крадет ценные секреты из глубин подсознания во время сна.."
+         data-video="Начало (2010) — русский трейлер HD.mp4">
+      <img src="8d7SRTHz7Gq7OJ1SS59vh0y8jkNdmsYX5U3Bagb11qLvKYHMibbLWDEbXs-OIH8LWrSzBWV0S9s4XJX-Oo54DWSaRhL1oC5rbL8Ohp5LuJSKKRvHW4jSxuIJFX2RPhqo46PdRQZ8w1MpSs6ey_ZrHMqmsIe39swL60AbLypfKFD7UtENdmUtpT6onlmCW26MFHtLz0Rei9l8TM.webp" loading="lazy" alt="Постер" class="w-full rounded mb-2" />
+      <h2 class="movie-title">Начало</h2>
+      <p><span class="movie-year">2010 </span> • <span class="movie-genres">
+фантастика, боевик, триллер</span> • 7.9</p>
+      <p class="text-sm text-gray-300">
+Кобб – талантливый вор, лучший из лучших в опасном искусстве извлечения: он крадет ценные секреты из глубин подсознания во время сна, когда человеческий разум наиболее уязвим. Но никакое планирование или мастерство не могут подготовить команду к встрече с опасным противником, который, кажется, предугадывает каждый их ход. Врагом, увидеть которого мог бы лишь Кобб.      </p>
+    </div>
+
+  </div>
+</section>
+
+<!--  Модальное окно -->
+<div id="movieModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
+  <div class="bg-gray-900 p-6 rounded-lg shadow-xl max-w-2xl relative w-full mx-4">
+    <button id="closeModal" class="absolute top-2 right-2 text-cyan-400 hover:text-red-500 text-2xl">&times;</button>
+    <video id="modalVideo" class="w-full mb-4 rounded" controls></video>
+    <h2 id="modalTitle" class="text-2xl neon mb-2">Название фильма</h2>
+    <p id="modalDescription" class="text-gray-300 mb-4">Описание фильма</p>
+    <div class="flex gap-4">
+      <button id="watchNowBtn" class="bg-cyan-500 hover:bg-cyan-600 text-black px-4 py-2 rounded w-full">Смотреть</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('movieModal');
+  const modalVideo = document.getElementById('modalVideo');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDescription = document.getElementById('modalDescription');
+  const closeModal = document.getElementById('closeModal');
+  const watchNowBtn = document.getElementById('watchNowBtn');
+
+  document.querySelectorAll('.movie-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const videoSrc = card.dataset.video;
+      const title = card.querySelector('.movie-title').innerText;
+      const description = card.querySelector('p.text-sm')?.innerText || '';
+      const movieId = card.dataset.id;
+
+      modalVideo.src = videoSrc;
+      modalTitle.innerText = title;
+      modalDescription.innerText = description;
+
+      // Устанавливаем ссылку на страницу фильма с этим id
+      watchNowBtn.setAttribute('onclick', `goToMovie(${movieId})`);
+      watchNowBtn.setAttribute('data-id', movieId);
+      modal.classList.remove('hidden');
+    });
+  });
+
+  closeModal.addEventListener('click', () => {
+    modal.classList.add('hidden');
+    modalVideo.pause();
+    modalVideo.currentTime = 0;
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+      modalVideo.pause();
+      modalVideo.currentTime = 0;
+    }
+  });
+
+  // Переход на страницу с фильмом
+  function goToMovie(movieId) {
+    window.location.href = `movie.html?id=${movieId}`;
+  }
+</script>
+
+<script>
+  const scrollContainer = document.getElementById('scrollContainer');
+
+  scrollContainer.addEventListener('wheel', (evt) => {
+    evt.preventDefault();
+    scrollContainer.scrollLeft += evt.deltaY;
+  });
+</script>
+
+<script>
+  const apiKey = '552bd05089e570f9506a70919db070e7';
+  const input = document.getElementById('searchInput');
+  const resultsContainer = document.getElementById('searchResults');
+
+  input.addEventListener('input', async () => {
+    const query = input.value.trim();
+    if (query.length < 2) {
+      resultsContainer.innerHTML = '';
+      return;
+    }
+
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=ru-RU&query=${encodeURIComponent(query)}`);
+      const data = await response.json();
+
+      resultsContainer.innerHTML = '';
+
+      if (data.results.length === 0) {
+        resultsContainer.innerHTML = '<p class="text-white text-center col-span-full">Фильмы не найдены.</p>';
+        return;
+      }
+
+      for (const movie of data.results.slice(0, 6)) {
+        const poster = movie.poster_path
+          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+          : 'https://via.placeholder.com/500x750?text=Нет+постера';
+
+        const trailer = await fetch(`https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${apiKey}&language=ru-RU`);
+        const trailerData = await trailer.json();
+
+        const youtubeTrailer = trailerData.results.find(v => v.type === 'Trailer' && v.site === 'YouTube');
+
+        const card = document.createElement('div');
+        card.className = 'bg-zinc-900 text-white rounded-xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300';
+
+        card.innerHTML = `
+          <img src="${poster}" alt="${movie.title}" class="w-full h-72 object-cover" />
+          <div class="p-4">
+            <h3 class="text-xl font-semibold">${movie.title}</h3>
+            <p class="text-cyan-400 opacity-90 text-sm mb-1">Рейтинг: ${movie.vote_average}</p>
+            <p class="text-sm text-gray-400">${movie.release_date}</p>
+          </div>
+          ${
+            youtubeTrailer
+              ? `<div class="aspect-video"><iframe class="w-full h-full" src="https://www.youtube.com/embed/${youtubeTrailer.key}" frameborder="0" allowfullscreen></iframe></div>`
+              : `<p class="text-gray-500 text-sm text-center pb-4">Трейлер недоступен</p>`
+          }
+        `;
+
+        resultsContainer.appendChild(card);
+      }
+    } catch (error) {
+      console.error('Ошибка при поиске фильмов:', error);
+      resultsContainer.innerHTML = '<p class="text-red-500 text-center">Ошибка загрузки данных.</p>';
+    }
+  });
+</script>
+
+ <!-- About Section -->
+  <section id="about" class="px-6 py-16 bg-black">
+    <h2 class="text-3xl font-semibold mb-6">О нас</h2>
+    <p class="text-gray-400 leading-relaxed max-w-3xl">NeoCinema — это портал для всех, кто обожает кино. Мы предлагаем самые свежие трейлеры, рейтинги и персональные рекомендации. Погружайся в мир Sci-Fi и фантазии вместе с нами!</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 bg-black text-sm text-gray-500">
+    © 2025 NeoCinema. Все права защищены.
+  </footer>
+
+<script>
+  // Проверка авторизации
+  const isLoggedIn = localStorage.getItem("neoUser") === "true";
+  const authBtn = document.querySelector('a[href="login.html"]');
+
+  // Обновление текста кнопки входа/кабинета
+  function updateAuthUI() {
+    if (isLoggedIn) {
+      authBtn.textContent = "Личный кабинет";
+      authBtn.href = "account.html";
+    } else {
+      authBtn.textContent = "Вход / Регистрация";
+      authBtn.href = "login.html";
+    }
+  }
+
+  updateAuthUI();
+
+  // Переход к фильму + сохранить в историю
+  function goToMovie(movieId) {
+    const isLoggedIn = localStorage.getItem("neoUser") === "true";
+
+    if (!isLoggedIn) {
+      alert("Войдите в аккаунт для просмотра фильма.");
+      return;
+    }
+
+    const movieTitle = document.getElementById("modalTitle").innerText;
+
+    let history = JSON.parse(localStorage.getItem("neoHistory")) || [];
+
+    if (!history.includes(movieTitle)) {
+      history.push(movieTitle);
+      localStorage.setItem("neoHistory", JSON.stringify(history));
+    }
+
+    // Переход на страницу фильма
+    window.location.href = `movie.html?id=${movieId}`;
+  }
+</script>
+</body>
+</html>
+
